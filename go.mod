@@ -6,7 +6,7 @@ require (
 	github.com/cooldogedev/spectrum v0.0.40
 	github.com/josscoder/bedrockpack v0.0.0-20250610173112-c3b91b49c01e
 	github.com/pelletier/go-toml/v2 v2.2.4
-	github.com/sandertv/gophertunnel v1.46.0
+	github.com/sandertv/gophertunnel v1.47.3
 )
 
 require (
@@ -21,6 +21,7 @@ require (
 	github.com/klauspost/compress v1.18.0 // indirect
 	github.com/muhammadmuzzammil1998/jsonc v1.0.0 // indirect
 	github.com/onsi/ginkgo/v2 v2.23.4 // indirect
+	github.com/pelletier/go-toml v1.9.5 // indirect
 	github.com/quic-go/quic-go v0.51.0 // indirect
 	github.com/sandertv/go-raknet v1.14.3-0.20250305181847-6af3e95113d6 // indirect
 	github.com/scylladb/go-set v1.0.2 // indirect
