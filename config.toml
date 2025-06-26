@@ -1,0 +1,17 @@
+[discovery]
+server = "127.0.0.1:19133"
+fallbackServer = "127.0.0.1:19133"
+
+[status_provider]
+serverName = "§l§o§bBB§r§7: §dOpening!"
+serverSubName = "DraftMC"
+
+[otf]
+orgName = "DraftMC"
+repoName = "DraftRP"
+branch = "master"
+pat = ""
+updateInterval = "5m"  # (e.g. "10s", "5m", "1h")
+
+[api]
+listen = "127.0.0.1:19132"
