@@ -43,7 +43,21 @@ func main() {
 	logger := slog.Default()
 
 	data, err := os.ReadFile("config.toml")
-	if err != nil {
+	if os.IsNotExist(err) {
+		logger.Warn("config.toml not found, generating default config.toml")
+
+		defaultCfg := defaultConfig()
+		buf, err := toml.Marshal(defaultCfg)
+		if err != nil {
+			log.Fatalf("failed to marshal default config: %v", err)
+		}
+
+		if err := os.WriteFile("config.toml", buf, 0644); err != nil {
+			log.Fatalf("failed to write default config.toml: %v", err)
+		}
+
+		data = buf
+	} else if err != nil {
 		log.Fatalf("failed to read config.toml: %v", err)
 	}
 
@@ -119,4 +133,41 @@ func getPAT(pat string) string {
 		return pat
 	}
 	return os.Getenv("GITHUB_PAT")
+}
+
+func defaultConfig() Config {
+	return Config{
+		Discovery: struct {
+			Server         string `toml:"server"`
+			FallbackServer string `toml:"fallbackServer"`
+		}{
+			Server:         "127.0.0.1:19133",
+			FallbackServer: "127.0.0.1:19133",
+		},
+		StatusProvider: struct {
+			ServerName    string `toml:"serverName"`
+			ServerSubName string `toml:"serverSubName"`
+		}{
+			ServerName:    "Spectrum Proxy",
+			ServerSubName: "Default SubName",
+		},
+		OTF: struct {
+			OrgName        string `toml:"orgName"`
+			RepoName       string `toml:"repoName"`
+			Branch         string `toml:"branch"`
+			PAT            string `toml:"pat"`
+			UpdateInterval string `toml:"updateInterval"`
+		}{
+			OrgName:        "your-org",
+			RepoName:       "your-repo",
+			Branch:         "main",
+			PAT:            "",
+			UpdateInterval: "10m",
+		},
+		API: struct {
+			Listen string `toml:"listen"`
+		}{
+			Listen: ":19132",
+		},
+	}
 }
