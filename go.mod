@@ -1,6 +1,6 @@
 module github.com/draftmc/proxy
 
-go 1.24.4
+go 1.23
 
 require (
 	github.com/cooldogedev/spectral v0.0.5 // indirect
